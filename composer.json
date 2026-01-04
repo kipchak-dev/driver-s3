@@ -1,0 +1,29 @@
+{
+    "name": "kipchak/driver-s3",
+    "type": "middleware",
+    "description": "An Object Storage (S3) driver (dependency) for the Kipchak API Development Kit (ADK)",
+    "keywords": [
+        "APIs",
+        "S3",
+        "Microservices",
+        "Mamluk",
+        "Object Storage"
+    ],
+    "homepage": "https://mamluk.net",
+    "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Kipchak\\Driver\\S3\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "async-aws/simple-s3": "*",
+        "kipchak/core": "^2",
+        "kipchak/driver-logger": "^1"
+    }
+}
