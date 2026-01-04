@@ -27,6 +27,7 @@ class S3 implements Interfaces\Driver
                     'accessKeyId' => $connectionDetails['access_key'],
                     'accessKeySecret' => $connectionDetails['secret_key'],
                     'region' => $connectionDetails['region'],
+                    'endpoint' => $connectionDetails['endpoint']
                 ]);
 
                 return $client;
