@@ -15,5 +15,4 @@ return [
         'region' => 'ap-central-1',
         'endpoint' => 'upcloudobjects.com',
     ],
-
 ];

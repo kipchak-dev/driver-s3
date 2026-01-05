@@ -1,8 +1,16 @@
-# CouchDB Driver for Kipchak
+# S3 Compatible Object Storage Driver for Kipchak
 
-This driver is based on the  CZGit PHP library.
+This driver is based on the Async AWS S3 Client (SimpleS3Client). 
 
-It supports multiple Git repository connections.
+This is a standalone S3 package as opposed to the offical AWS which includes the entire AWS featureet for all their services..
+
+It supports connections to multiple s3 / object storage servers.
+
+For more details, please see:
+
+* https://async-aws.com/integration/simple-s3.html
+* https://async-aws.com/clients/s3.html
+* https://async-aws.com/configuration.html
 
 #### Composer Package
 
@@ -11,7 +19,7 @@ It supports multiple Git repository connections.
 #### Sample Config File:
 
 This config file should be placed in your Kipchak project's config directory, as in the starter
-project at https://1x.ax/mamluk/kipchak/starter/~files/master/config/kipchak.git.php.
+project at https://1x.ax/mamluk/kipchak/starter/~files/master/config/kipchak.s3.php.
 
 The config file should look like this (also avalable in sample.config.php):
 
@@ -21,45 +29,41 @@ The config file should look like this (also avalable in sample.config.php):
 use function Kipchak\Core\env;
 
 return [
-    'settings' => [
-        'clone_dir' => '/tmp/kipchak-git'
+    'default' => [
+        'access_key' => env('FRANKFURT_ACCESS_KEY', 'some-access-key'),
+        'secret_key' => env('FRANKFURT_SECRET_KEY', 'some-secret-key'),
+        'region' => 'eu-central-1',
+        'endpoint' => 'upcloudobjects.com',
     ],
-    'repositories' => [
-        'default' => [
-            'origin' => '1x.ax/mamluk/kipchak/core.git', // Repositories are cloned over HTTPS. SSH is not supported due to security reasons.
-            'username' => env('GIT_USERNAME', 'user'),
-            'password' => env('GIT_PASSWORD', 'token'), // Or personal access token on most platforms
-            'branch' => 'master' // Initial branch to checkout
-        ],
-        'starter' => [
-            'origin' => '1x.ax/mamluk/kipchak/starter.git', // Repositories are cloned over HTTPS. SSH is not supported due to security reasons.
-            'username' => env('GIT_USERNAME', 'user'),
-            'password' => env('GIT_PASSWORD', 'token'), // Or personal access token on most platforms
-            'branch' => 'master' // Initial branch to checkout
-        ],
-    ]
+    'asia' => [
+        'access_key' => env('ASIA_ACCESS_KEY', 'some-access-key'),
+        'secret_key' => env('ASIA_SECRET_KEY', 'some-secret-key'),
+        'region' => 'ap-central-1',
+        'endpoint' => 'upcloudobjects.com',
+    ],
+
 ];
 
 ```
 
 ## How to use it?
 
-Install it via composer: `composer require kipchak/driver-git`.
+Install it via composer: `composer require kipchak/driver-s3`.
 
 ### Example Usage
 
 ```php
 // Initialise the driver in drivers/drivers.php
-\Mamluk\Kipchak\Driver\Git\Git::iniitalise($container);
+\Mamluk\Kipchak\Driver\S3\S3::iniitalise($container);
 
 // Load the Git driver.
-$couchdb = Kipchak\Driver\Git\S3::get('default'); // default is the repository name in the config file.
-// Use the $git client as you would the GitRepository class in the CzGit client.
+$s3 = Kipchak\Driver\S3\S3::get('default'); // default is the connection name in the config file.
+// Use the $s3 client as you would the S3 client documented at https://async-aws.com/clients/s3.html.
 ```
 
 ## Detailed Documentation
 
-https://kipchak.dev/docs/driver-git
+https://kipchak.dev/docs/driver-s3
 
 ## What is a Kipchak Driver?
 
