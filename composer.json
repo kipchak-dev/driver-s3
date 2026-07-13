@@ -23,7 +23,7 @@
     "prefer-stable": true,
     "require": {
         "async-aws/simple-s3": "*",
-        "kipchak/core": "^2",
+        "kipchak/core": "^2 || ^3",
         "kipchak/driver-logger": "^1"
     }
 }
