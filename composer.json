@@ -25,5 +25,19 @@
         "async-aws/simple-s3": "*",
         "kipchak/core": "^2 || ^3",
         "kipchak/driver-logger": "^1"
+    },
+    "extra": {
+        "kipchak": {
+            "type": "driver",
+            "config": "sample.config.php",
+            "configName": "kipchak.s3.php",
+            "initialise": "\\Kipchak\\Driver\\S3\\S3::initialise($container);",
+            "after": [
+                "kipchak/driver-config",
+                "kipchak/driver-logger"
+            ],
+            "before": [],
+            "docs": "https://kipchak.dev/docs/driver-object-storage"
+        }
     }
 }
