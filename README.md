@@ -18,8 +18,8 @@ For more details, please see:
 
 #### Sample Config File:
 
-This config file should be placed in your Kipchak project's config directory, as in the starter
-project at https://1x.ax/mamluk/kipchak/starter/~files/master/config/kipchak.s3.php.
+This config file should be placed in your Kipchak project's config directory, as in the examples
+project at https://github.com/kipchak-dev/examples/blob/master/config/kipchak.s3.php.
 
 The config file should look like this (also available in sample.config.php):
 
