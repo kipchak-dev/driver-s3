@@ -70,6 +70,18 @@ and for tuning uploads:
   default supports objects up to 640GB; raise it (128, 256, 512…) for larger objects.
   Individual `upload()` calls can still override it via `['PartSize' => 128]`.
 
+Three more optional keys (from 1.46) limit how long a request may take, for a store that may be slow or
+unreachable. Without any of them, a request has no time limit and is retried 3 times, as AsyncAws does by default.
+
+* **`timeout`** (seconds) — how long one attempt may wait for data before it fails.
+* **`max_duration`** (seconds) — the total time for one request, its retries included. Once it is reached, nothing
+  more is retried, so this is the longest a request can take.
+* **`retries`** (int, default `3`) — how many times a failed request is tried again, with waits of about 1, 2 and 4
+  seconds between attempts.
+
+All three apply to each HTTP request, not to a whole `upload()` or listing call. A multipart upload or a paged
+listing makes one request per part or page, each with its own limit, so the whole call can take longer.
+
 ## How to use it?
 
 Install it via composer: `composer require kipchak/driver-s3`.
